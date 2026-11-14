@@ -1,0 +1,32 @@
+<!-- Minimal placeholder; replaced by the Bootstrap dashboard in Phase 4. -->
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>SMS History</title></head>
+<body>
+  <h1>SMS History</h1>
+  <p><a href="{% url 'sms_app:send_sms' %}">Send SMS</a></p>
+  {% for message in messages %}<p><strong>{{ message.tags }}:</strong> {{ message }}</p>{% endfor %}
+  <p>Total: {{ counts.total }} | Submitted: {{ counts.submitted }} | Failed: {{ counts.failed }}</p>
+  <table border="1">
+    <tr><th>Date</th><th>Recipient</th><th>Message</th><th>Status</th><th>Error</th><th></th></tr>
+    {% for sms in sms_list %}
+    <tr>
+      <td>{{ sms.created_at|date:"M j, Y g:i A" }}</td>
+      <td>{{ sms.recipient }}</td>
+      <td>{{ sms.body|truncatechars:60 }}</td>
+      <td>{{ sms.get_status_display }}</td>
+      <td>{{ sms.error_message }}</td>
+      <td>
+        {% if sms.is_submitted %}
+        <form method="post" action="{% url 'sms_app:refresh_status' sms.pk %}">
+          {% csrf_token %}<button type="submit">Refresh status</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="6">No messages yet.</td></tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

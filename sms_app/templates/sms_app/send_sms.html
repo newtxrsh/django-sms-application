@@ -1,0 +1,15 @@
+<!-- Minimal placeholder; replaced by the Bootstrap UI in Phase 4. -->
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Send SMS</title></head>
+<body>
+  <h1>Send SMS</h1>
+  <p><a href="{% url 'sms_app:history' %}">History</a></p>
+  {% for message in messages %}<p><strong>{{ message.tags }}:</strong> {{ message }}</p>{% endfor %}
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send SMS</button>
+  </form>
+</body>
+</html>
