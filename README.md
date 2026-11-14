@@ -26,7 +26,7 @@ The activity suggests three roles. Our group has **2 members**, so the tasks of 
 | Member | Role | Responsibilities |
 |---|---|---|
 | **John Paul Palaran** (GitHub: `newtxrsh`) | Backend | Django project setup and settings, `SMSMessage` model and admin, views and URL routing, textbee integration (`services.py`), error handling, status refresh, SIM-slot selection |
-| **Eian Gabriel Aguilar** | Frontend & QA | Django form and phone/message validation, Bootstrap templates and UI, live character/segment counter, history dashboard, unit tests, README, demo coordination |
+| **Eian Gabriel Aguilar** (GitHub: `myb.eian`) | Frontend & QA | Django form and phone/message validation, Bootstrap templates and UI, live character/segment counter, history dashboard, unit tests, README, demo coordination |
 
 ---
 
