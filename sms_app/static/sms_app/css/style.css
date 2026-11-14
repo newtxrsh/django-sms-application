@@ -1,0 +1,16 @@
+/* Small additions on top of Bootstrap 5. */
+
+#id_message {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+/* Keep long messages from stretching the history table. */
+.message-cell {
+  max-width: 22rem;
+  word-break: break-word;
+}
+
+.navbar-brand .bi {
+  vertical-align: -0.1em;
+}

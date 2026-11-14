@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+from django.contrib.messages import constants as message_constants
 from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
@@ -137,6 +138,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Bootstrap calls the red alert "danger", Django calls the level "error".
+MESSAGE_TAGS = {message_constants.ERROR: 'danger'}
 
 
 # textbee.dev SMS gateway credentials (read from environment, never hardcoded).

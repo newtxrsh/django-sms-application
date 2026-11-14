@@ -31,6 +31,13 @@ def normalize_phone_number(raw):
     return number
 
 
+class MessageField(forms.CharField):
+    def to_python(self, value):
+        # Browsers submit textarea line breaks as "\r\n". Turn them into "\n" before
+        # the length check, so a line break counts as 1 character, like the live counter.
+        return super().to_python(value).replace('\r\n', '\n')
+
+
 class SMSForm(forms.Form):
     recipient = forms.CharField(
         label='Recipient phone number',
@@ -46,7 +53,7 @@ class SMSForm(forms.Form):
     )
     # strip=True (the default) turns a whitespace-only message into "",
     # which then fails the "required" check.
-    message = forms.CharField(
+    message = MessageField(
         label='Message',
         max_length=MAX_MESSAGE_LENGTH,
         error_messages={
