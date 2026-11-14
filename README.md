@@ -78,6 +78,9 @@ IT120-DJANGO/
 ├── .env.example              # placeholder settings (safe to commit)
 ├── .gitignore                # excludes venv/, .env, db.sqlite3, caches, editor folders
 ├── README.md
+├── docs/
+│   ├── COLLABORATION.md      # branches, pull requests and review plan
+│   └── DEMO_SCRIPT.md        # timed demo video script
 ├── sms_project/              # Django project
 │   ├── settings.py           # reads SECRET_KEY, DEBUG and textbee settings from .env
 │   ├── urls.py               # includes sms_app.urls
