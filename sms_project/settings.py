@@ -145,6 +145,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 TEXTBEE_API_KEY = os.getenv('TEXTBEE_API_KEY', '')
 TEXTBEE_DEVICE_ID = os.getenv('TEXTBEE_DEVICE_ID', '')
+# Optional: which SIM slot sends the SMS (0 = SIM 1, 1 = SIM 2). Empty = phone's default SIM.
+TEXTBEE_SIM_SLOT = os.getenv('TEXTBEE_SIM_SLOT', '')
 
 
 # Logging: errors from the SMS app are printed to the console (runserver window).

@@ -69,7 +69,8 @@ def refresh_status_view(request, pk):
     result = get_sms_status(sms.provider_message_id)
     if result.success:
         sms.status = result.status
-        sms.save(update_fields=['status', 'updated_at'])
+        sms.error_message = result.error
+        sms.save(update_fields=['status', 'error_message', 'updated_at'])
         messages.info(request, f'Status for the message to {sms.recipient} is now "{sms.get_status_display()}".')
     else:
         messages.error(request, f'Could not refresh the status. {result.error}')

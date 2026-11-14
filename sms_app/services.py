@@ -132,6 +132,11 @@ def send_sms(recipient, message):
         'message': message,
         'deviceId': settings.TEXTBEE_DEVICE_ID,
     }
+    sim_slot = str(settings.TEXTBEE_SIM_SLOT).strip()
+    if sim_slot in {'0', '1', '2', '3', '4', '5', '6', '7'}:
+        payload['simSlotIndex'] = int(sim_slot)
+    elif sim_slot:
+        logger.warning('Ignoring invalid TEXTBEE_SIM_SLOT %r; using the phone default SIM.', sim_slot)
     try:
         body = _call_textbee('POST', '/gateway/send-sms', payload)
     except TextbeeError as exc:
@@ -170,4 +175,8 @@ def get_sms_status(batch_id):
         return SMSResult(success=False, message_id=batch_id,
                          error='textbee did not return a recognised status. Please try again later.')
 
-    return SMSResult(success=True, message_id=batch_id, status=status)
+    # For a failed message, keep textbee's explanation (e.g. "no SMS credit on SIM").
+    reason = ''
+    if status == SMSMessage.Status.FAILED:
+        reason = str(first.get('errorMessage') or 'The phone could not send the SMS.')[:300]
+    return SMSResult(success=True, message_id=batch_id, status=status, error=reason)
